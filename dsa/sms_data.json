@@ -1,0 +1,52 @@
+[
+  {
+    "address": "250780000001",
+    "date": "1700000000000",
+    "body": "You have received 5,000 RWF from John Doe. Your new balance is 15,000 RWF."
+  },
+  {
+    "address": "250780000002",
+    "date": "1700003600000",
+    "body": "Payment of 2,500 RWF to Kigali Supermarket has been completed. Your new balance is 12,500 RWF."
+  },
+  {
+    "address": "250780000003",
+    "date": "1700007200000",
+    "body": "You have transferred to 0780000099 3,000 RWF. Your new balance is 9,500 RWF."
+  },
+  {
+    "address": "250780000004",
+    "date": "1700010800000",
+    "body": "You have withdrawn 4,000 RWF from agent 00123. Your new balance is 5,500 RWF."
+  },
+  {
+    "address": "250780000005",
+    "date": "1700014400000",
+    "body": "You have purchased airtime worth 500 RWF. Your new balance is 5,000 RWF."
+  },
+  {
+    "address": "250780000006",
+    "date": "1700018000000",
+    "body": "A transaction of 1,000 RWF was initiated by merchant PayGo on your account."
+  },
+  {
+    "address": "250780000007",
+    "date": "1700021600000",
+    "body": "You have received 10,000 RWF from Jane Smith. Your new balance is 15,000 RWF."
+  },
+  {
+    "address": "250780000008",
+    "date": "1700025200000",
+    "body": "Bank charge of 100 RWF applied to your account. Your new balance is 14,900 RWF."
+  },
+  {
+    "address": "250780000009",
+    "date": "1700028800000",
+    "body": "You have purchased a bundle worth 1,000 RWF. Your new balance is 13,900 RWF."
+  },
+  {
+    "address": "250780000010",
+    "date": "1700032400000",
+    "body": "Your OTP is 482910. Do not share this code with anyone."
+  }
+]

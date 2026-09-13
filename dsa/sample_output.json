@@ -1,0 +1,25 @@
+{
+  "total": 10,
+  "total_amount": 27100.0,
+  "by_category": {
+    "incoming_money":        2,
+    "payment":               2,
+    "transfer":              1,
+    "withdrawal":            1,
+    "airtime":               2,
+    "third_party_initiated": 1,
+    "other":                 1
+  },
+  "transactions": [
+    { "date": "2023-11-14 22:13:20", "type": "incoming_money",        "amount": 5000.0,  "party": "+250780000001" },
+    { "date": "2023-11-14 23:13:20", "type": "payment",               "amount": 2500.0,  "party": "+250780000002" },
+    { "date": "2023-11-15 00:13:20", "type": "transfer",              "amount": 3000.0,  "party": "+250780000003" },
+    { "date": "2023-11-15 01:13:20", "type": "withdrawal",            "amount": 4000.0,  "party": "+250780000004" },
+    { "date": "2023-11-15 02:13:20", "type": "airtime",               "amount": 500.0,   "party": "+250780000005" },
+    { "date": "2023-11-15 03:13:20", "type": "third_party_initiated", "amount": 1000.0,  "party": "+250780000006" },
+    { "date": "2023-11-15 04:13:20", "type": "incoming_money",        "amount": 10000.0, "party": "+250780000007" },
+    { "date": "2023-11-15 05:13:20", "type": "payment",               "amount": 100.0,   "party": "+250780000008" },
+    { "date": "2023-11-15 06:13:20", "type": "airtime",               "amount": 1000.0,  "party": "+250780000009" },
+    { "date": "2023-11-15 07:13:20", "type": "other",                 "amount": null,    "party": "+250780000010" }
+  ]
+}

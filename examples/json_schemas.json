@@ -1,0 +1,169 @@
+{
+  "_comment": "MoMo SMS Analytics — JSON Schemas & API Response Examples | Team: Brain Boosters",
+
+  "transaction_category": {
+    "_description": "Lookup entity for the 7 MoMo SMS transaction categories",
+    "example": {
+      "id": 1,
+      "name": "incoming_money",
+      "description": "Money received from another MoMo user",
+      "created_at": "2024-01-01T00:00:00Z"
+    },
+    "schema": {
+      "id":          { "type": "integer", "description": "Surrogate PK" },
+      "name":        { "type": "string",  "enum": ["incoming_money","payment","transfer","withdrawal","airtime","third_party_initiated","other"] },
+      "description": { "type": "string" },
+      "created_at":  { "type": "string",  "format": "date-time" }
+    }
+  },
+
+  "user": {
+    "_description": "Any phone number that appears as a party in a transaction",
+    "example": {
+      "id": 1,
+      "phone": "+250780000001",
+      "display_name": "John Doe",
+      "created_at": "2024-01-01T00:00:00Z"
+    },
+    "schema": {
+      "id":           { "type": "integer" },
+      "phone":        { "type": "string", "pattern": "^\\+[0-9]{7,15}$", "description": "E.164 format" },
+      "display_name": { "type": "string" },
+      "created_at":   { "type": "string", "format": "date-time" }
+    }
+  },
+
+  "transaction": {
+    "_description": "Core fact record — one per unique SMS message",
+    "example": {
+      "id": 1,
+      "user_id": 6,
+      "category_id": 1,
+      "address": "250780000001",
+      "date": "2023-11-14T22:13:20Z",
+      "body": "You have received 5,000 RWF from John Doe. Your new balance is 15,000 RWF.",
+      "amount": 5000.00,
+      "body_hash": "a3f1...c9d2",
+      "created_at": "2024-01-01T00:00:00Z"
+    },
+    "schema": {
+      "id":          { "type": "integer" },
+      "user_id":     { "type": "integer", "description": "FK → users.id" },
+      "category_id": { "type": "integer", "description": "FK → transaction_categories.id" },
+      "address":     { "type": "string" },
+      "date":        { "type": "string", "format": "date-time" },
+      "body":        { "type": "string" },
+      "amount":      { "type": ["number", "null"], "minimum": 0 },
+      "body_hash":   { "type": "string", "description": "SHA-256 of body for deduplication" },
+      "created_at":  { "type": "string", "format": "date-time" }
+    }
+  },
+
+  "transaction_party": {
+    "_description": "Junction record resolving the M:N between transactions and users",
+    "example": {
+      "transaction_id": 1,
+      "user_id": 1,
+      "role": "sender"
+    },
+    "schema": {
+      "transaction_id": { "type": "integer", "description": "FK → transactions.id" },
+      "user_id":        { "type": "integer", "description": "FK → users.id" },
+      "role":           { "type": "string",  "enum": ["sender","receiver","agent","merchant"] }
+    }
+  },
+
+  "system_log": {
+    "_description": "ETL pipeline audit and error log entry",
+    "example": {
+      "id": 3,
+      "transaction_id": 7,
+      "level": "WARNING",
+      "event": "AMOUNT_NULL",
+      "message": "No RWF amount found in body; amount set to NULL",
+      "created_at": "2024-01-01T00:05:12Z"
+    },
+    "schema": {
+      "id":             { "type": "integer" },
+      "transaction_id": { "type": ["integer", "null"], "description": "FK → transactions.id; null for pipeline-level events" },
+      "level":          { "type": "string", "enum": ["INFO","WARNING","ERROR"] },
+      "event":          { "type": "string" },
+      "message":        { "type": "string" },
+      "created_at":     { "type": "string", "format": "date-time" }
+    }
+  },
+
+  "complex_transaction_response": {
+    "_description": "Complete API response for a single transaction — all related data fully nested. Maps to a JOIN across transactions, users, transaction_categories, and transaction_parties.",
+    "sql_mapping": {
+      "id":         "transactions.id",
+      "date":       "transactions.date",
+      "amount":     "transactions.amount",
+      "body":       "transactions.body",
+      "address":    "transactions.address",
+      "category":   "transaction_categories (JOIN on transactions.category_id)",
+      "owner":      "users (JOIN on transactions.user_id)",
+      "parties":    "transaction_parties + users (JOIN on transaction_id)"
+    },
+    "example": {
+      "id": 1,
+      "date": "2023-11-14T22:13:20Z",
+      "amount": 5000.00,
+      "body": "You have received 5,000 RWF from John Doe. Your new balance is 15,000 RWF.",
+      "address": "250780000001",
+      "category": {
+        "id": 1,
+        "name": "incoming_money",
+        "description": "Money received from another MoMo user"
+      },
+      "owner": {
+        "id": 6,
+        "phone": "+250780000099",
+        "display_name": "Account Owner"
+      },
+      "parties": [
+        {
+          "role": "sender",
+          "user": {
+            "id": 1,
+            "phone": "+250780000001",
+            "display_name": "John Doe"
+          }
+        },
+        {
+          "role": "receiver",
+          "user": {
+            "id": 6,
+            "phone": "+250780000099",
+            "display_name": "Account Owner"
+          }
+        }
+      ],
+      "logs": [
+        {
+          "level": "INFO",
+          "event": "LOAD_OK",
+          "message": "Record inserted successfully",
+          "created_at": "2024-01-01T00:05:00Z"
+        }
+      ]
+    }
+  },
+
+  "analytics_response": {
+    "_description": "Aggregated analytics API response — maps to GROUP BY query on transactions + transaction_categories",
+    "example": {
+      "total": 7,
+      "total_amount": 16000.00,
+      "by_category": {
+        "incoming_money":        { "count": 1, "total_rwf": 5000.00 },
+        "payment":               { "count": 1, "total_rwf": 2500.00 },
+        "transfer":              { "count": 1, "total_rwf": 3000.00 },
+        "withdrawal":            { "count": 1, "total_rwf": 4000.00 },
+        "airtime":               { "count": 1, "total_rwf": 500.00  },
+        "third_party_initiated": { "count": 1, "total_rwf": 1000.00 },
+        "other":                 { "count": 1, "total_rwf": null    }
+      }
+    }
+  }
+}

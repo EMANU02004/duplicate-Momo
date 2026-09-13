@@ -1,0 +1,14 @@
+{
+  "raw_sms_record": {
+    "address": "string — sender phone number",
+    "date":    "string — Unix timestamp in milliseconds",
+    "body":    "string — raw SMS message text"
+  },
+  "cleaned_record": {
+    "address":  "string — E.164 formatted phone e.g. +250780000001",
+    "date":     "string — ISO datetime e.g. 2023-11-14 12:00:00",
+    "body":     "string — trimmed SMS text",
+    "amount":   "float | null — extracted RWF amount",
+    "category": "string — one of: incoming_money, payment, transfer, withdrawal, airtime, third_party_initiated, other"
+  }
+}
