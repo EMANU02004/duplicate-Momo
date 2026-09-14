@@ -28,9 +28,9 @@ The following were **NOT** used with AI assistance:
 
 | Date | Team Member | Tool Used | Purpose (Permitted?) | Description |
 |---|---|---|---|---|
-| 2025-07-10 | Emmanuel Masambu | Grammar checker | Permitted | Reviewed `README.md` database documentation section for readability and verified SQL keyword casing and formatting consistency in `database/database_setup.sql`  |
-| 2025-07-10 | Pauline | Research tool | Permitted | Researched MySQL `CHECK` constraint syntax differences between MySQL 5.x and 8.x |
-| 2025-07-10 | Marion Gitau | Research tool | Permitted | Researched best practices for indexing FK columns in MySQL (see citation below) |
+| 2026-09-11 | Emmanuel Masambu | Grammar checker | Permitted | Reviewed `README.md` database documentation section for readability and verified SQL keyword casing and formatting consistency in `database/database_setup.sql`  |
+| 2026-09-12 | Pauline | Research tool | Permitted | Researched MySQL `CHECK` constraint syntax differences between MySQL 5.x and 8.x |
+| 2026-09-12 | Marion Gitau | Research tool | Permitted | Researched best practices for indexing FK columns in MySQL (see citation below) |
 
 ---
 
