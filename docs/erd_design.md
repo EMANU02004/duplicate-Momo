@@ -5,7 +5,7 @@
 
 ## Entity Relationship Diagram
 
-> The diagram file `erd_diagram.png` (exported from Draw.io) is located in this `/docs` folder.
+> The diagram file `momo_ERD.png` (exported from Draw.io) is located in this `/docs` folder.
 
 ### Entities & Relationships at a Glance
 
@@ -43,7 +43,7 @@ transactions (1) ──────< (M) system_logs
 
 ---
 
-## Design Rationale (≈ 270 words)
+## Design Rationale
 
 The schema is built around the single source of truth in the MoMo data: the **SMS message itself**. Every design decision flows from that anchor.
 

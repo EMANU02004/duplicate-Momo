@@ -98,7 +98,7 @@ See [`docs/erd_design.md`](docs/erd_design.md) for the full ERD specification an
 | `database/database_setup.sql` | Full DDL + sample DML + CRUD queries |
 | `examples/json_schemas.json` | JSON schemas for all entities + complex nested example |
 | `docs/erd_design.md` | ERD spec, cardinality table, design rationale |
-| `docs/erd_diagram.png` | Draw.io ERD export |
+| `docs/momo_ERD.png` | Draw.io ERD export |
 
 ## Project Structure
 ```
